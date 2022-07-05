@@ -1,14 +1,14 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    id(androidApp)
+    kotlin(androidPlugin)
 }
 
 android {
-    compileSdk = 32
+    compileSdk = compileSdk
     defaultConfig {
         applicationId = "com.github.ryutaro.kmm_sample.android"
-        minSdk = 21
-        targetSdk = 32
+        minSdk = minSdk
+        targetSdk = targetSdk
         versionCode = 1
         versionName = "1.0"
     }
@@ -24,4 +24,10 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+
+    with(Deps.Coroutine) {
+        implementation(coroutineCore)
+        implementation(coroutineAndroid)
+        testImplementation(coroutineTest)
+    }
 }

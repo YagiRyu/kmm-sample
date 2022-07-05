@@ -1,7 +1,7 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    kotlin(multiplatform)
+    kotlin(cocoapods)
+    id(androidLib)
 }
 
 version = "1.0"
@@ -23,13 +23,21 @@ kotlin {
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(Deps.Ktor.ktorCore)
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(Deps.Ktor.ktorOkhttp)
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -53,11 +61,11 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = minSdk
+        targetSdk = targetSdk
     }
 }
 dependencies {
