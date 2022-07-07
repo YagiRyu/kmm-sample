@@ -1,6 +1,8 @@
 plugins {
     kotlin(multiplatform)
     kotlin(cocoapods)
+    kotlin(serializationPlugin) version Version.kotlin
+    id(sqldelightPlugin)
     id(androidLib)
 }
 
@@ -25,7 +27,21 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Deps.Ktor.ktorCore)
+                with(Deps.Ktor) {
+                    implementation(ktorCore)
+//                    implementation(ktorJson)
+                    implementation(ktorSerialization)
+                    implementation(ktorLogging)
+                }
+                with(Deps.Koin) {
+                    implementation(koinCore)
+                    implementation(koinTest)
+                }
+                implementation(Deps.serialization)
+                implementation(Deps.napier)
+                implementation(Deps.kotlinCommon)
+                implementation(Deps.Coroutine.coroutineCore)
+                implementation(Deps.Sqldelight.sqldelightRuntime)
             }
         }
         val commonTest by getting {
@@ -35,7 +51,10 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(Deps.Ktor.ktorOkhttp)
+                implementation(Deps.Ktor.ktorAndroid)
+                implementation(Deps.Ktor.ktorOkHttp)
+                implementation(Deps.Coroutine.coroutineAndroid)
+                implementation(Deps.Sqldelight.sqldelightAndroid)
             }
         }
         val androidTest by getting
@@ -47,6 +66,10 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                implementation(Deps.Ktor.ktorIos)
+                implementation(Deps.Sqldelight.sqldelightNative)
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
@@ -61,13 +84,19 @@ kotlin {
 }
 
 android {
-    compileSdk = compileSdk
+    compileSdk = Version.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = minSdk
-        targetSdk = targetSdk
+        minSdk = Version.minSdk
+        targetSdk = Version.targetSdk
     }
 }
 dependencies {
     testImplementation("junit:junit:4.12")
+}
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "com.github.ryutaro.kmm_sample.shared.cache"
+    }
 }
