@@ -1,5 +1,6 @@
 const val androidPlugin = "android"
 const val androidApp = "com.android.application"
+const val androidKotlin = "org.jetbrains.kotlin.android"
 const val androidLib = "com.android.library"
 const val multiplatform = "multiplatform"
 const val composePlugin = "org.jetbrains.compose"
@@ -47,7 +48,8 @@ object Deps {
     object Ktor {
         const val ktorCore = "io.ktor:ktor-client-core:${Version.ktor}"
         const val ktorJson = "io.ktor:ktor-client-json:${Version.ktor}"
-        const val ktorSerialization = "io.ktor:ktor-client-serialization:${Version.ktor}"
+        const val ktorSerialization = "io.ktor:ktor-serialization-kotlinx-json:${Version.ktor}"
+        const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Version.ktor}"
         const val ktorAndroid = "io.ktor:ktor-client-android:${Version.ktor}"
         const val ktorIos = "io.ktor:ktor-client-darwin:${Version.ktor}"
         const val ktorLogging = "io.ktor:ktor-client-logging:${Version.ktor}"

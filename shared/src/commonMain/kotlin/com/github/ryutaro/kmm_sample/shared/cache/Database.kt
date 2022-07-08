@@ -1,8 +1,8 @@
 package com.github.ryutaro.kmm_sample.shared.cache
 
-import com.github.ryutaro.kmm_sample.model.Links
-import com.github.ryutaro.kmm_sample.model.Rocket
-import com.github.ryutaro.kmm_sample.model.RocketLaunch
+import com.github.ryutaro.kmm_sample.shared.entity.Links
+import com.github.ryutaro.kmm_sample.shared.entity.Rocket
+import com.github.ryutaro.kmm_sample.shared.entity.RocketLaunch
 
 internal class Database(
     databaseDriverFactory: DatabaseDriverFactory

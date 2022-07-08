@@ -1,4 +1,4 @@
-package com.github.ryutaro.kmm_sample.model
+package com.github.ryutaro.kmm_sample.shared.entity
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

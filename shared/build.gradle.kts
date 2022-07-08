@@ -29,9 +29,9 @@ kotlin {
             dependencies {
                 with(Deps.Ktor) {
                     implementation(ktorCore)
-//                    implementation(ktorJson)
                     implementation(ktorSerialization)
                     implementation(ktorLogging)
+                    implementation(ktorContentNegotiation)
                 }
                 with(Deps.Koin) {
                     implementation(koinCore)
